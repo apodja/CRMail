@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 from pathlib import Path
 import os
+import django_heroku
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -137,3 +138,5 @@ AUTH_USER_MODEL = "contacts.CustomUser"
 LOGIN_REDIRECT_URL = "contact_list"
 LOGOUT_REDIRECT_URL = "login"
 LOGIN_URL = 'login'
+
+django_heroku.settings(locals())
