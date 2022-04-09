@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="modal fade" tabindex="-1" role="dialog" id="modal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content"></div>
+  </div>
+</div>
+<div class="row">
+    <div class="col-12">
+      <div class="card mb-4">
+        <div class="card-header pb-0">
+          <h4 class="text-primary">All Audiences</h6>
+        </div>
+        <div class="card-body px-0 pt-0 pb-2">
+          <div class="table p-0">
+            <table class="table align-items-center justify-content-center mb-0">
+              <thead>
+                <tr>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Audience Name</th>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Contacts</th>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Date Created</th>
+                </tr>
+              </thead>
+              <tbody>
+            {% for audience in audiences  %}
+            <input type="hidden" value="{{audience.pk}}" id="aid">
+                <tr>
+                  <td>
+                    <div class="d-flex px-2">                      
+                      <div class="my-auto">
+                        <h6 class="mb-0 text-sm"><a href="{% url 'audience' audience.pk %}">{{audience.name}}</a></h6>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <p class="text-sm font-weight-bold mb-0">{{audience.nr_contacts}}</p>
+                  </td>
+                  <td>
+                    <span class="text-xs font-weight-bold">{{audience.date_added}}</span>
+                  </td>
+                  <td class="align-middle">
+                    <button type="button" class="delete-audience btn btn-primary btn-sm mb-0" data-form-url="{% url 'delete_audience' audience.pk %}">
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+            {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock content %}
+
+

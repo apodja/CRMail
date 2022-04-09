@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="title">Create email template</h5>
+        </div>
+        <div class="card-body">
+          <form method="post" action="">
+              {% csrf_token %}
+              <input type="hidden" name="tinymce" id="tiny">
+            <div class="row">
+              <div class="col-md-12 ">
+                <div class="form-group">
+                  <label>Template Title</label>
+                  <input type="text" name="title" class="form-control" placeholder="Title" required>
+                </div>
+              </div>
+              
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                    <div class="form-group">
+                        <label>Design your email</label>
+                        <textarea id="txt"> </textarea>
+                    </div>
+              </div>
+            </div>
+            <div class="card-footer">
+                <button type="submit" disabled class="btn btn-fill btn-primary savet">Save Template</button>
+                <a style="color:white" class="bt btn btn-secondary">Save Content</a>
+              </div>
+          </form>
+        </div>
+        
+      </div>
+    </div>
+
+  </div>
+
+{% endblock content %}
+
+
+{% block scripts %}
+<script src="{% static 'js/tinymce.js' %}"></script>
+<script>
+    tinymce.init({selector:'textarea',
+        plugins: [
+            "advlist autolink lists link image charmap print preview hr anchor pagebreak",
+            "searchreplace wordcount visualblocks visualchars code fullscreen",
+            "insertdatetime media nonbreaking save table contextmenu directionality",
+            "emoticons template paste textcolor colorpicker textpattern"
+        ],
+    });</script>
+
+    <script>
+        $('.tox-notifications-container').css("display","none");
+        $(document).ready(function() {
+
+            $(document).on("click", ".bt", function () {
+        
+                var tinyMCEcontent = tinymce.activeEditor.getContent();
+        
+                $('#tiny').val(tinyMCEcontent);
+                $('.savet').attr('disabled',false);
+     
+                      
+            });
+        });
+    </script>
+{% endblock scripts %}
+

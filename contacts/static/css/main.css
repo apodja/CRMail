@@ -1,0 +1,15 @@
+table.tb {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+a.btu{
+    text-align: center!important;
+    padding: 10px !important;
+    cursor: pointer;
+}
+
+.mod-up label {
+    color:white;
+}

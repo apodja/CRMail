@@ -1,0 +1,45 @@
+<div class="sidebar">
+
+    <div class="sidebar-wrapper">
+      <div class="logo">
+        <a href="{% url 'contact_list'%}" class="simple-text logo-mini">
+          L-CRM
+        </a>
+        <a href="{% url 'contact_list'%}" class="simple-text logo-normal">
+         Lion CRM
+        </a>
+      </div>
+      <ul class="nav">
+        <li class="active ">
+          <a href="./dashboard.html">
+            <i class="tim-icons icon-chart-pie-36"></i>
+            <p>Dashboard</p>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'contact_list' %}">
+            <i class="tim-icons icon-bullet-list-67"></i>
+            <p>All contacts</p>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'audiences' %}">
+            <i class="tim-icons icon-components"></i>
+            <p>All audiences</p>
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <i class="tim-icons icon-notes"></i>
+            <p>Email Templates</p>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'campaigns' %}">
+            <i class="tim-icons icon-send"></i>
+            <p>Campaigns</p>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>

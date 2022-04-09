@@ -1,0 +1,155 @@
+{% extends 'base.html' %}
+{% load static  %}
+{% block content %}
+
+
+<div class="row">
+    <div class="col-12">
+      <div class="card mb-4">
+        <div class="card-header pb-0">
+          <h3 class="text-primary">Create Campaign</h3>
+        </div>
+        <form method="POST" action="">
+            {% csrf_token %}
+        <div class="card-body px-0 pt-0 pb-2">
+            <div class="container border">
+
+                <div class="row">
+                    <div class="col-md-6 mt-2">
+                        <h5 class="text">Title of campaign</h5>
+                    </div>
+                    <div class="col-md-6">
+                        <button type="button" class="btn btn-primary btn-sm" style="float:right" data-toggle="collapse" data-target="#title">Add title </button>
+                    </div>
+                </div>
+                <div id="title" class="collapse">
+                    <div class="form-group">
+                        <input type="text" name="title" id="tit" class="form-control" placeholder="Add title" required>
+                    </div>
+                </div>
+                <hr style="border-top: 1px solid grey ;">
+
+                <div class="row">
+                    <div class="col-md-6 mt-2">
+                        <h5 class="text">From Email</h5>
+                    </div>
+                    <div class="col-md-6">
+                        <button type="button" class="btn btn-primary btn-sm" style="float:right" data-toggle="collapse" data-target="#from">Add email </button>
+                    </div>
+                </div>
+                <div id="from" class="collapse">
+                    <div class="form-group">
+                        <input type="text" name="from" class="form-control" placeholder="Type email" required >
+                    </div>
+                </div>
+                <hr style="border-top: 1px solid grey ;">
+
+                <div class="row">
+                    <div class="col-md-6 mt-2">
+                        <h5 class="text">To Audience </h5>
+                    </div>
+                    <div class="col-md-6">
+                        <button type="button" class="btn btn-primary btn-sm" style="float:right" data-toggle="collapse" data-target="#to">Add recipients</button>
+                    </div>
+                </div>
+                <div id="to" class="collapse">
+                    <div class="form-group">
+                        <select name="audience" class="form-control">
+                            {% for audience in audiences  %}
+                                <option style="color:black;" value="{{audience.id}}">{{audience.name}}</option>
+                            {% endfor %}
+                        </select>
+                    
+                    </div>
+                </div>
+                <hr style="border-top: 1px solid grey ;">
+
+                <div class="row">
+                    <div class="col-md-6 mt-2">
+                        <h5 class="text">Subject Line</h5>
+                    </div>
+                    <div class="col-md-6">
+                        <button type="button" class="btn btn-primary btn-sm" style="float:right" data-toggle="collapse" data-target="#subject">Add Subject</button>
+                    </div>
+                </div>
+                <div id="subject" class="collapse">
+                    <div class="form-group">
+                        <input type="text" name="subject" class="form-control" placeholder="Add subject Line" >
+                    </div>
+                </div>
+                <hr style="border-top: 1px solid grey ;">
+
+                <div class="row">
+                    <div class="col-md-6 mt-2">
+                        <h5 class="text">Design Email</h5>
+                    </div>
+                    <div class="col-md-6">
+                        <button type="button" class="btn btn-primary btn-sm" style="float:right" data-toggle="collapse" data-target="#editor">Design email</button>
+                    </div>
+                </div>
+                <div id="editor" class="collapse">
+                    <div class="form-group">
+                        
+                        <textarea id="txt"> </textarea>
+                        <input type="hidden" name="tinymce" id="mce">
+                        <div id="err">
+                        </div>
+                    </div>
+                    <a style="color:white" class="btu btn-block btn-success">Save Content</a>
+                </div>
+                <input type="hidden" id="mail" name="mail">
+                <hr style="border-top: 1px solid grey ;">
+                <div class="row">                   
+                    <div class="col-md-12">
+                        <input type="submit" class="btn btn-primary btn-block" value="Save Campaign">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+      </div>
+    </div>
+  </div>
+{% endblock content %}
+
+
+{% block scripts %}
+<script src="{% static 'js/tinymce.js' %}"></script>
+<script>
+    tinymce.init({selector:'textarea',
+        plugins: [
+            "advlist autolink lists link image charmap print preview hr anchor pagebreak",
+            "searchreplace wordcount visualblocks visualchars code fullscreen",
+            "insertdatetime media nonbreaking save table contextmenu directionality",
+            "emoticons template paste textcolor colorpicker textpattern"
+        ],
+    });</script>
+<script>
+        $('.tox-notifications-container').css("display","none");
+        $(document).ready(function() {
+
+            $(document).on("click", ".btu", function () {       
+                var tinyMCEcontent = tinymce.activeEditor.getContent();
+                $('#mce').val(tinyMCEcontent);
+
+                $.ajax({
+                    method:'POST',
+                    url:{% url 'email_form' %},
+                    data:{
+                    title:$('#tit').val(),
+                    tinymce:$('#mce').val(),
+                    csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val()
+                }, 
+                success: function(data) 
+                    {
+                        $('#mail').val(data.email_id)
+                        $("#err").html("<div class=alert alert-success' role='alert'>Template has been saved  </div>")
+                    
+                    },
+                });
+            });
+        });
+    </script> 
+
+{% endblock scripts %}
+

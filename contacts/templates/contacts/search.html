@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+<div class="row">
+    <div class="col-md-12">
+      <div class="card ">
+        <div class="card-header">
+          <h4 class="card-title text-primary"> Search Results</h4>
+        </div>
+        <div class="card-body">
+          <div class="table">
+            <table class="table tablesorter tb " id="">
+              <thead class=" text-primary">
+                <tr>
+                  <th>
+                    ID
+                  </th>
+                  <th>
+                    First Name
+                  </th>
+                  <th>
+                    Last Name
+                  </th>
+                  <th>
+                    Email
+                  </th>
+                  <th>
+                    Phone Number
+                  </th>
+                  <th>
+                    Birthday
+                  </th>
+                  <th>
+                    Address
+                  </th>
+                  <th>
+                    City
+                  </th>
+                  <th>
+                    Country
+                  </th>
+                  <th>
+                    Date Added
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+            {% for contact in contacts_list %}
+
+                <tr>
+                  <td>
+                   {{contact.id}}
+                  </td>
+                  <td>
+                    {{contact.first_name}}
+                  </td>
+                  <td>
+                    {{contact.last_name}}
+                  </td>
+                  <td>
+                    <a href="{% url 'contact_detail' contact.pk %}" >{{contact.email}} </a>
+                  </td>
+                  <td>
+                    {{contact.phone}}
+                  </td>
+                  <td>
+                    {{contact.birthday}}
+                  </td>
+                  <td>
+                    {{contact.address}}
+                  </td>
+                  <td>
+                    {{contact.city}}
+                  </td>
+                  <td>
+                    {{contact.country}}
+                  </td>
+                  <td>
+                    {{contact.date_added}}
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+          <div class="pagination">
+            <span class="step-links">
+                {% if page_obj.has_previous %}
+                    <a href="?page=1">&laquo; first</a>
+                    <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+                {% endif %}
+        
+                <span class="current">
+                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                </span>
+        
+                {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}">next</a>
+                    <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+                {% endif %}
+            </span>
+        </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+
+{% endblock content %}

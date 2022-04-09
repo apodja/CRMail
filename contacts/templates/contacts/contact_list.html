@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<p> {{request.user.id}}</p>
+<div class="row">
+    <div class="col-md-12">
+      <div class="card ">
+        <div class="card-header">
+          <h4 class="card-title text-primary"> Contacts List</h4>
+        </div>
+        <div class="card-body">
+          <div class="table">
+            <table class="table tablesorter tb " id="">
+              <thead class=" text-primary">
+                <tr>
+                  <th>
+                    ID
+                  </th>
+                  <th>
+                    First Name
+                  </th>
+                  <th>
+                    Last Name
+                  </th>
+                  <th>
+                    Email
+                  </th>
+                  <th>
+                    Phone Number
+                  </th>
+                  <th>
+                    Birthday
+                  </th>
+                  <th>
+                    Address
+                  </th>
+                  <th>
+                    City
+                  </th>
+                  <th>
+                    Country
+                  </th>
+                  <th>
+                    Date Added
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+            {% for contact in contacts %}
+
+                <tr>
+                  <td>
+
+                   {{contact.id}}
+
+                  </td>
+                  <td>
+                    {{contact.first_name}}
+                  </td>
+                  <td>
+                    {{contact.last_name}}
+                  </td>
+                  <td>
+                    <a href="{% url 'contact_detail' contact.pk %}" >{{contact.email}} </a>
+                  </td>
+                  <td>
+                    {{contact.phone}}
+                  </td>
+                  <td>
+                    {{contact.birthday}}
+                  </td>
+                  <td>
+                    {{contact.address}}
+                  </td>
+                  <td>
+                    {{contact.city}}
+                  </td>
+                  <td>
+                    {{contact.country}}
+                  </td>
+                  <td>
+                    {{contact.date_added}}
+                  </td>
+                </tr>
+
+                {% endfor %}
+                
+
+              </tbody>
+            </table>
+          </div>
+          {% include "pagination.html" %}
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+
+{% endblock content %}

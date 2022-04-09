@@ -1,0 +1,136 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+<div class="row">
+    <div class="col-md-12">
+      <div class="card ">
+        <div class="card-header">
+          <div class="row">
+              <div class="col-md-9">
+                <h4 class="card-title text-primary"> {{audience.name}}</h4>
+              </div>
+              <div class="col-md-3">
+                <form method="post" enctype='multipart/form-data' action="{% url 'import_contacts'%}">
+                  {% csrf_token %}
+                  <label class="btn btn-primary">
+                    Upload CSV
+                    <input name="file" type="file" style="display:none;" onchange="form.submit()">
+                    <input type="hidden" name="aud" value="{{audience.id}}">
+                  </label>
+                </form>
+              </div>
+          </div>
+
+        <div class="card-body">
+          {% if contacts %}
+          <div class="table">
+            <table class="table tablesorter tb " id="">
+              <thead class=" text-primary">
+                <tr>
+                  <th>
+                    ID
+                  </th>
+                  <th>
+                    First Name
+                  </th>
+                  <th>
+                    Last Name
+                  </th>
+                  <th>
+                    Email
+                  </th>
+                  <th>
+                    Phone Number
+                  </th>
+                  <th>
+                    Birthday
+                  </th>
+                  <th>
+                    Address
+                  </th>
+                  <th>
+                    City
+                  </th>
+                  <th>
+                    Country
+                  </th>
+                  <th>
+                    Date Added
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+            {% for contact in contacts %}
+
+                <tr>
+                  <td>
+                    {% if contact.id %}
+                    {{contact.id}}
+                    {% endif %}
+                  </td>
+                  <td>                   
+                    {% if contact.first_name %}
+                    {{contact.first_name}}
+                    {% endif %}
+                  </td>
+                  <td>
+                    {% if contact.last_name %}
+                    {{contact.last_name}}
+                    {% endif %}
+                  </td>
+                  <td>
+                    {% if contact.email %}
+                     {{contact.email}}
+                    {% endif %}
+                  </td>
+                  <td>
+                    {% if contact.phone %}
+                    {{contact.phone}}
+                    {% endif %}
+                  </td>
+                  <td>
+                    {% if contact.birthday %}
+                    {{contact.birthday}}
+                    {% endif %}
+                  </td>
+                  <td>
+                    {% if contact.address %}
+                    {{contact.address}}
+                    {% endif %}
+                  </td>
+                  <td>
+                    {% if contact.city %}
+                    {{contact.city}}
+                    {% endif %}
+                  </td>
+                  <td>
+                    {% if contact.country %}
+                    {{contact.country}}
+                    {% endif %}
+                  </td>
+                  <td>
+                    {% if contact.date_added %}
+                    {{contact.date_added}}
+                    {% endif %}
+                  </td>
+                </tr>
+
+                {% endfor %}
+                
+
+              </tbody>
+            </table>
+          {% else %}
+          
+          {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+
+{% endblock content %}

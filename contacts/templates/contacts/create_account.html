@@ -1,0 +1,79 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>
+    Lion CRM
+  </title>
+  <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,600,700,800" rel="stylesheet" />
+  <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+  <link href="{% static 'css/nucleo-icons.css' %}" rel="stylesheet" />
+  <link href="{% static 'css/black-dashboard.css' %}" rel="stylesheet" />
+  <link href="{% static 'demo/demo.css' %}" rel="stylesheet" />
+  <link href="{% static 'css/main.css' %}" rel="stylesheet" />
+</head>
+<body>
+<main class="main-content  mt-0">
+  <div class="page-header align-items-start min-vh-50 pt-5 pb-11 m-3 border-radius-lg"  >
+    <span class="mask bg-gradient-dark opacity-6"></span>
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-5 text-center mx-auto">
+          <h1 class="text-white mb-2 mt-5">Welcome!</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row mt-lg-n10 mt-md-n11 mt-n10 justify-content-center">
+      <div class="col-xl-4 col-lg-5 col-md-7 mx-auto">
+        <div class="card z-index-0">
+          <div class="card-header text-center pt-4">
+            <h5>Create an account </h5>
+          </div>
+
+          <div class="card-body">
+            <form method="POST" action="">
+              {% csrf_token %}
+              <div class="mb-3">
+                <input type="text" name="username" class="form-control" placeholder="Username" aria-label="Name">
+              </div>
+              <div class="mb-3">
+                <input type="email" name="email" class="form-control" placeholder="Email" aria-label="Email">
+              </div>
+              <div class="mb-3">
+                <input type="password" name="password1" class="form-control" placeholder="Password" aria-label="Password">
+              </div>
+              <div class="mb-3">
+                <input type="password" name="password2" class="form-control" placeholder="Password confirmation" aria-label="Password confirmation">
+              </div> 
+              <div class="form-check form-check-info text-start">
+                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked>
+                <label class="form-check-label" for="flexCheckDefault">
+                  I agree the <a href="javascript:;" class="text-primary font-weight-bolder">Terms and Conditions</a>
+                </label>
+              </div> 
+              {% for message in messages %}
+                <div class="alert alert-info">{{message}}</div>
+              {% endfor %}
+              <div class="text-center">
+                <input type="submit" class="btn bg-gradient-dark w-100 my-4 mb-2" value="Sign up">
+              </div>
+              <p class="text-sm mt-3 mb-0">Already have an account? <a href="{% url 'login' %}" class="text-primary font-weight-bolder">Sign in</a></p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script src="{% static 'js/core/jquery.min.js ' %}"></script>
+<script src="{% static 'js/core/popper.min.js ' %}"></script>
+<script src="{% static 'js/core/bootstrap.min.js ' %}"></script>
+<script src="{% static 'js/jquery.bootstrap.modal.forms.js' %}"></script> 
+</body>
+</html>

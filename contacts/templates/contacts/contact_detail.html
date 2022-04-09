@@ -1,0 +1,124 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+
+
+<!-- Modal 2 with id="modal" -->
+<div class="modal fade" tabindex="-1" role="dialog" id="modal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content"></div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-8">
+    <div class="card">
+        <div class="card-header">
+          <div class="row">
+              <div class="col-md-9">
+                <h4 class="title">Contact Details</h4>
+              </div>
+          
+              <div class="col-md-3">
+                <button type="button" id="upd" class="update-contact bs-modal btn btn-sm btn-primary" data-form-url="{% url 'update_contact' contact.pk %}">
+                  <span>Update</span>
+                </button>
+              </div>
+          </div>
+          
+            
+        </div>    
+      <div class="card-body">
+          <div class="row mb-4">
+            <div class="col-md-6 pr-md-1">
+              <div class="form-group">
+                <label>First Name</label>
+                <p class="form-control" >{{contact.first_name}}</p>
+              </div>
+            </div>
+            <div class="col-md-6 pl-md-1">
+              <div class="form-group">
+                <label>Last Name</label>
+                <p class="form-control" >{{contact.last_name}}</p>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-4">
+            <div class="col-md-6 pr-md-1">
+              <div class="form-group">
+                <label>Company </label>
+                <p class="form-control" >Ben Dover</p>
+              </div>
+            </div>
+
+            <div class="col-md-6 pl-md-1">
+              <div class="form-group">
+                <label for="exampleInputEmail1">Email address</label>
+                <p class="form-control" >{{contact.email}}</p>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-4">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label>Birthday</label>
+                <p class="form-control" >{{contact.birthday}}</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="row mb-4">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label>Address</label>
+                <p class="form-control" >{{contact.address}}</p>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-4">
+            <div class="col-md-6 pr-md-1">
+              <div class="form-group">
+                <label>City</label>
+                <p class="form-control" >{{contact.city}}</p>
+              </div>
+            </div>
+            <div class="col-md-6 px-md-1">
+              <div class="form-group">
+                <label>Country</label>
+                <p class="form-control" >{{contact.country}}</p>
+              </div>
+            </div>
+            
+          </div>
+      </div>
+      <div class="card-footer">
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card card-user">
+      <div class="card-body">
+        <p class="card-text">
+          <div class="author">
+            <div class="block block-one"></div>
+            <div class="block block-two"></div>
+            <div class="block block-three"></div>
+            <div class="block block-four"></div>
+            <a href="javascript:void(0)">
+              <img class="avatar" src="{% static 'img/emilyz.jpg' %}" alt="...">
+              <h5 class="title">{{contact.first_name}} {{contact.last_name}}</h5>
+            </a>
+            <p class="description">
+              Ceo/Co-Founder
+            </p>
+          </div>
+        </p>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+{% endblock content %}
