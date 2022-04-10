@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block content %}
 
+{% if campaigns %}
 
 <div class="row">
     <div class="col-12">
@@ -56,6 +58,19 @@
       </div>
     </div>
   </div>
+
+{% else %}
+  <div class="row"  style="border:solid 1px white">
+    <div class="col-md-12 text-center" style="margin:auto; " >
+      <img src="{% static 'img/empty.png' %}" width="250">
+    </div>
+    <div class="col-md-12 text-center" >
+      <h3 style="margin-bottom:0">Opsssss! Seems like you have no campaigns ! </h3>
+      <h4><a class="text-primary" href="{% url 'create_campaign' %}">Click here </a> to create your first campaign ! </h4>
+    </div>
+  </div>
+{% endif %}
+
 {% endblock content %}
 {% block scripts %}
 <script>

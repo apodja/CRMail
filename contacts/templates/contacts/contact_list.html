@@ -1,8 +1,9 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block content %}
 
-<p> {{request.user.id}}</p>
-<div class="row">
+{% if contacts %}
+  <div class="row">
     <div class="col-md-12">
       <div class="card ">
         <div class="card-header">
@@ -95,7 +96,15 @@
     </div>
 
   </div>
-
-
-
+{% else %}
+  <div class="row"  style="border:solid 1px white">
+    <div class="col-md-12 text-center" style="margin:auto; " >
+      <img src="{% static 'img/empty.png' %}" width="250">
+    </div>
+    <div class="col-md-12 text-center" >
+      <h3 style="margin-bottom:0">Opsssss! Seems like you have no contacts ! </h3>
+      <h4><a class="text-primary" href="">Click here </a> to create an audience and start importing contacts ! </h4>
+    </div>
+  </div>
+{% endif %}
 {% endblock content %}

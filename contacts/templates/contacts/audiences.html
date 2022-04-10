@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block content %}
 
 <div class="modal fade" tabindex="-1" role="dialog" id="modal">
@@ -6,7 +7,8 @@
     <div class="modal-content"></div>
   </div>
 </div>
-<div class="row">
+{% if audiences %}
+  <div class="row" >
     <div class="col-12">
       <div class="card mb-4">
         <div class="card-header pb-0">
@@ -53,6 +55,18 @@
       </div>
     </div>
   </div>
+{% else %}
+  <div class="row"  style="border:solid 1px white">
+    <div class="col-md-12 text-center" style="margin:auto; " >
+      <img src="{% static 'img/empty.png' %}" width="250">
+    </div>
+    <div class="col-md-12 text-center" >
+      <h3 style="margin-bottom:0">Opsssss! Seems like you have no audiences ! </h3>
+      <h4><a class="text-primary" href="">Click here </a> to create your first audience ! </h4>
+    </div>
+  </div>
+  
+{% endif %}
 {% endblock content %}
 
 

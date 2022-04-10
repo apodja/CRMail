@@ -164,7 +164,7 @@ class CampaignListView(LoginRequiredMixin,ListView):
     context_object_name = 'campaigns'
 
     def get_queryset(self) :
-        user = self.request.user.id
+        user = self.request.user
         campaigns = Campaign.objects.filter(user=user)
         return campaigns
 
